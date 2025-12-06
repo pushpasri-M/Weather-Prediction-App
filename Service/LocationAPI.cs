@@ -9,17 +9,28 @@ using System.Threading.Tasks;
 
 namespace NotePad_MVP.Service
 {
-    public class LocationAPI
+    /// <summary>
+    /// Implementation of location service using Open-Meteo Geocoding API
+    /// </summary>
+    public class LocationAPI : ILocationService
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://geocoding-api.open-meteo.com/v1/";
-        public LocationAPI()
+        
+        public LocationAPI() : this(new HttpClient())
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(BaseUrl);
-
         }
-        public async Task<(double longitude, double latitude)> GetValueAsync(string cityName)
+
+        public LocationAPI(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+            if (_httpClient.BaseAddress == null)
+            {
+                _httpClient.BaseAddress = new Uri(BaseUrl);
+            }
+        }
+
+        public async Task<LocationResult> GetLocationAsync(string cityName)
         {
             var response = await _httpClient.GetAsync($"search?name={cityName}");
             if (response.IsSuccessStatusCode)
@@ -31,14 +42,10 @@ namespace NotePad_MVP.Service
 
                 if (data != null && data.results != null && data.results.Count > 0)
                 {
-                    double latitude = data.results[0].latitude;
-                    double longitude = data.results[0].longitude;
-                    return (longitude, latitude);
+                    return data.results[0];
                 }
             }
             throw new Exception("City not found or API error");
         }
-
-
     }
 }

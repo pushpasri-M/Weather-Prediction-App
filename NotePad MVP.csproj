@@ -15,7 +15,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
+   <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -64,9 +64,12 @@
     <Compile Include="Model\LocationResponse.cs" />
     <Compile Include="Model\LocationResult.cs" />
     <Compile Include="Model\WheatherData.cs" />
+    <Compile Include="Presenter\IWeatherPresenter.cs" />
     <Compile Include="Presenter\WeatherFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ILocationService.cs" />
+    <Compile Include="Service\IWeatherService.cs" />
     <Compile Include="Service\LocationAPI.cs" />
     <Compile Include="Service\WeatherAPI.cs" />
     <Compile Include="view\IViewForm.cs" />
