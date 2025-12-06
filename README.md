@@ -2,8 +2,11 @@
 
 A modern, premium-styled Windows Forms application built with C# that provides real-time weather forecasts, hourly temperature trends, and daily rainfall probabilities.
 
-![Weather App Screenshot](https://via.placeholder.com/800x450?text=Weather+App+Preview)
-*(Note: Replace with actual screenshot)*
+## Screenshots
+
+![Weather App Interface](screenshot1.png)
+
+*The Weather Prediction App featuring a modern dark theme with real-time weather data, temperature trends, and rainfall probability charts.*
 
 ## Features
 
@@ -15,6 +18,8 @@ A modern, premium-styled Windows Forms application built with C# that provides r
 -   **Smart Search**: Search for any city to get instant weather data.
 -   **Robust Error Handling**: Custom-styled error messages that match the application theme.
 -   **Responsive Layout**: Custom window controls (Minimize, Maximize, Close) and draggable title bar.
+
+![Weather App Interface](screenshot2.png)
 
 ## Technologies Used
 

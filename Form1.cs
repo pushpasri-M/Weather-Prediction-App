@@ -31,6 +31,7 @@ namespace NotePad_MVP
         private Panel welcomePanel; // Welcome panel for Home view
         private Panel errorPanel; // Error panel for displaying messages
         private Label loadingLabel; // Loading indicator label
+        private bool isSearchTabActive = true; // Track which tab is currently active
         
         // Drag functionality fields
         private bool isDragging = false;
@@ -625,8 +626,24 @@ namespace NotePad_MVP
             
             await weather.FetchAndDisplayWeatherAsync();
             
-            // Show results panels after fetch
-            tableLayoutPanel3.Visible = true;
+            // Show results based on active tab
+            if (isSearchTabActive)
+            {
+                // In search tab - show search results
+                tableLayoutPanel3.Visible = true;
+            }
+            else
+            {
+                // In forecast tab - keep forecast visible, load search data in background
+                // Search panel data is already populated by SetWeatherInfo
+                // Keep forecast panel visible
+                var forecastPanel = Controls.Find("panelForecast", true).FirstOrDefault() as Panel;
+                if (forecastPanel != null)
+                {
+                    forecastPanel.Visible = true;
+                    forecastPanel.BringToFront();
+                }
+            }
         }
 
         // ===== NAVIGATION METHODS =====
@@ -865,6 +882,9 @@ namespace NotePad_MVP
 
         private void ShowSearchView()
         {
+            // Set active tab
+            isSearchTabActive = true;
+            
             // Show search bar
             tableLayoutPanel4.Visible = true;
             
@@ -900,6 +920,9 @@ namespace NotePad_MVP
 
         private void ShowForecastView()
         {
+            // Set active tab
+            isSearchTabActive = false;
+            
             // Check if we have valid data (City Name is set and not default)
             bool hasData = !string.IsNullOrEmpty(label9.Text) && label9.Text != "label9" && label9.Text != "City Name";
             
